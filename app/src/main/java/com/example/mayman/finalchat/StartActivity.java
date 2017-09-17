@@ -1,0 +1,39 @@
+package com.example.mayman.finalchat;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+
+public class StartActivity extends AppCompatActivity {
+
+    Button regButton, login_button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_start);
+
+
+        regButton = (Button)findViewById(R.id.reg_button_id);
+        login_button = (Button)findViewById(R.id.login_button_id);
+
+        regButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StartActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }//end onCreate
+
+}//end class StartActivity
