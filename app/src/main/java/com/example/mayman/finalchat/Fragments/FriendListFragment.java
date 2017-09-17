@@ -9,14 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mayman.finalchat.FragmentHolders.FriendList;
 import com.example.mayman.finalchat.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +35,6 @@ public class FriendListFragment extends Fragment {
     FirebaseAuth mFirebaseAuth;
 
     String mCurrent_user_id;
-
 
 
     public FriendListFragment() {
@@ -50,26 +54,10 @@ public class FriendListFragment extends Fragment {
         mCurrent_user_id = mFirebaseAuth.getCurrentUser().getUid();
 
         mFriendsDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
-        //mUserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
-//        mFriendsDatabaseRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.getChildrenCount()>0)
-//                {
-//                    for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()) {
-//                      Log.v("batatta",dataSnapshot1.getKey()+" "+dataSnapshot1.getValue(FriendList.class).date);
-//
-//                    }
-//                }//end if
-//            }//end onDataChange
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-        recyclerView_friends.setHasFixedSize(true);
+
+        Log.v("exceed", mFriendsDatabaseRef.getKey());
         recyclerView_friends.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Inflate the layout for this fragment
@@ -81,46 +69,70 @@ public class FriendListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerAdapter<FriendList,UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FriendList, UserViewHolder>(
+        FirebaseRecyclerAdapter<FriendList, FriendsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FriendList, FriendsViewHolder>(
                 FriendList.class,
                 R.layout.single_user_view,
-                UserViewHolder.class,
-                mUserDatabaseReference) {
+                FriendsViewHolder.class,
+                mFriendsDatabaseRef) {
             @Override
-            protected void populateViewHolder(UserViewHolder viewHolder, FriendList friendList, int position)
-            {
-                Log.v("a89de",friendList.getDate());
-               // viewHolder.setName(userObjs.getName());
-                //viewHolder.setStatus(userObjs.getStatus());
+            protected void populateViewHolder(final FriendsViewHolder viewHolder, FriendList friendList, int position) {
 
-             //   progressDialog.dismiss();
+                viewHolder.setDate(friendList.getDate());
 
-                final String user_id = getRef(position).getKey();
+                String list_idUser = getRef(position).getKey();
 
-            }
-        };
+                mUserDatabaseReference.child(list_idUser).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String uName = dataSnapshot.child("name").getValue().toString();
+                        String uImage = dataSnapshot.child("image").getValue().toString();
+                        String uStatus = dataSnapshot.child("status").getValue().toString();
+
+                        viewHolder.setName(uName);
+                        viewHolder.setImage(uImage);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });//end addValueEventListener()
+
+            }//end populateViewHolder
+
+        }; //end firebaseRecyclerAdapter
 
 
         recyclerView_friends.setAdapter(firebaseRecyclerAdapter);
+        firebaseRecyclerAdapter.notifyDataSetChanged();
+
     }//end onStart()
 
-    public static class UserViewHolder extends RecyclerView.ViewHolder {
+    public static class FriendsViewHolder extends RecyclerView.ViewHolder {
         View mView;
 
-        public UserViewHolder(View itemView) {
+        public FriendsViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
         }//end UserViewHolder
 
-        public void setName(String name){
+
+        public void setDate(String date) {
+            TextView textViewName = mView.findViewById(R.id.single_user_status_id);
+            textViewName.setText(date);
+        }//end setDate
+
+
+        public void setName(String name) {
             TextView textViewName = mView.findViewById(R.id.textView_single_name_id);
             textViewName.setText(name);
         }//end setName
 
-        public void setStatus(String status){
-            TextView textViewName = mView.findViewById(R.id.single_user_status_id);
-            textViewName.setText(status);
-        }//end setStatus
+        public void setImage(String image) {
+            ImageView imageView = mView.findViewById(R.id.user_singleImg_id);
+            Picasso.with(mView.getContext()).load(image).into(imageView);
+        }//end setImage
 
     }//end UserViewHolder
+
 }//end FriendListFragment

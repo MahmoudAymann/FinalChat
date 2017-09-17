@@ -109,6 +109,8 @@ public class ProfileActivity extends AppCompatActivity {
                                     if (dataSnapshot.hasChild(user_id)) {
                                         mCurrent_state = "friends";
                                         sendReqButton.setText("Unfriend");
+                                        declineButton.setVisibility(View.INVISIBLE);
+                                        declineButton.setEnabled(false);
                                     }//end if
 
                                     progressDialog.dismiss();
@@ -240,10 +242,10 @@ public class ProfileActivity extends AppCompatActivity {
                 //..................WHEN UNFRIEND.......CASE4.....
                 if (mCurrent_state.equals("friends")) {
 
-                    mFriendRequestDatabase.child(mCurrentUser.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    mFriendsDatabaseReference.child(mCurrentUser.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            mFriendRequestDatabase.child(user_id).child(mCurrentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            mFriendsDatabaseReference.child(user_id).child(mCurrentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     sendReqButton.setEnabled(true);
@@ -255,7 +257,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 }
                             });
                         }
-                    });
+                    });//end command
 
                 }//end if
 
@@ -263,9 +265,27 @@ public class ProfileActivity extends AppCompatActivity {
         });//end button
 
         declineButton = (Button) findViewById(R.id.button_declineReq);
+        declineButton.setVisibility(View.INVISIBLE);
+        declineButton.setEnabled(false);
         declineButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                mFriendRequestDatabase.child(mCurrentUser.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        mFriendRequestDatabase.child(user_id).child(mCurrentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                mCurrent_state = "not_friends";
+
+                                declineButton.setVisibility(View.VISIBLE);
+                                declineButton.setEnabled(true);
+                            }
+                        });
+                    }
+                });//end command
+
 
             }
         });//end button

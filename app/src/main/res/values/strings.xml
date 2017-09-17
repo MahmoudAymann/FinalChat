@@ -4,6 +4,33 @@
     <string name="auth_failed">authFailed plz try again</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="getPair">qen0001</string>
+    <string name="getPairPref">qen0002</string>
+    <string name="getImgUri">qen0003</string>
+    <string name="getImgUri01">qen0004</string>
+    <string name="getImgUri02">qen0005</string>
+    <!--     chat room flags      -->
+    <string name="getImgUri03">qen0006</string>
+    <string name="getImgUri04">qen0007</string>
+    <string name="getImgUri05">qen0008</string>
+    <string name="ChatserviceListnerString">qen0009</string>
+    <string name="getPairPrefKEY">qen00010</string>
+    <string name="getPairPrefKEYIntent">qen00011</string>
+    <!-- intent tags -->
+    <string name="selectPhotoIntent">1000</string>
+    <string name="uBloodwallpaperServiceintent">1001</string>
+    <string name="uBloodwallpaperServiceintentFlag">1002</string>
+    <string name="getPairPrefKEYExtras">1003</string>
+    <!--                                                          -->
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="add">Add</string>
+    <string name="Wake_up">Wake_up</string>
+    <string name="spinner_title">pickStatus</string>
+    <string name="title_activity_wake__up__activity">WAKE_UP_ACTIVITY</string>
+<!-- -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="CANCEL_FRIEND_REQUEST">CANCEL FRIEND REQUEST</string>
     <string name="ACCEPT_FRIEND_REQUEST">ACCEPT FRIEND REQUEST</string>
