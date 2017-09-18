@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = textInputLayoutPass.getEditText().getText().toString();
 
                 if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(pass)){
-                    loginProgressDialog.setTitle("Logging In");
-                    loginProgressDialog.setMessage("please wait...");
+                    loginProgressDialog.setTitle(getString(R.string.LOADING));
+                    loginProgressDialog.setMessage(getString(R.string.PLEASEWAIT));
                     loginProgressDialog.setCanceledOnTouchOutside(false);
                     loginProgressDialog.show();
                     loginUser(email,pass);
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             loginProgressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, "Welcome bby", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, getString(R.string.WELCOME), Toast.LENGTH_SHORT).show();
                             //doin
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);

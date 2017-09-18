@@ -21,12 +21,12 @@
         android:layout_marginEnd="-10dp"
         android:layout_marginRight="-15dp"
         android:layout_marginTop="6.5dp"
-        android:contentDescription="string/text1"
+        android:contentDescription="@string/string_arrowleft"
         android:src="@drawable/ecco3" />
 
     <TextView
         android:id="@+id/item2textother"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_marginTop="5dp"
@@ -34,7 +34,7 @@
         android:background="@drawable/roundcorner2"
         android:gravity="top"
         android:padding="16dp"
-        android:text="string/android_charting_application_xml_ui_design_android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_android_charting_application_xml_ui_design"
+        android:text="@string/string_"
         android:textColor="#000"
         android:textSize="17.5sp" />
 </LinearLayout>

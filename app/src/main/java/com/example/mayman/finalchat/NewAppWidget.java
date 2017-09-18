@@ -24,6 +24,7 @@ public class NewAppWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
         views.setTextViewText(R.id.name, name);
         views.setTextViewText(R.id.status, status);
+        if(img.length()>10)
         Picasso.with(context).load(img).centerCrop().resize(100,100).into(views,R.id.image, new int[] {appWidgetId});
 
         // Instruct the widget manager to update the widget

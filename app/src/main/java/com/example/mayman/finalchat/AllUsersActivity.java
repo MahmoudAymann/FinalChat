@@ -30,8 +30,8 @@ public class AllUsersActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(AllUsersActivity.this));
 
         progressDialog = new ProgressDialog(AllUsersActivity.this);
-        progressDialog.setTitle("LoadingUserData");
-        progressDialog.setMessage("please wait...");
+        progressDialog.setTitle(getString(R.string.LOADING));
+        progressDialog.setMessage(getString(R.string.PLEASEWAIT));
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 

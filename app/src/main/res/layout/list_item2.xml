@@ -7,14 +7,14 @@
 
     <TextView
         android:id="@+id/item2text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_marginTop="5dp"
         android:layout_weight="6"
         android:background="@drawable/roundcorner1"
         android:padding="16dp"
-        android:text="string/android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_tutorial_with_example"
+        android:text="@string/string_android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_tutorial_with_example"
         android:textColor="#000"
         android:textSize="17.5sp" />
 
@@ -26,7 +26,8 @@
         android:layout_marginLeft="-15dp"
         android:layout_marginStart="-10dp"
         android:layout_marginTop="6.5dp"
-        android:src="@drawable/arrow_bg1" />
+        android:src="@drawable/arrow_bg1"
+        android:contentDescription="@string/arrow_right" />
 
     <de.hdodenhof.circleimageview.CircleImageView
 

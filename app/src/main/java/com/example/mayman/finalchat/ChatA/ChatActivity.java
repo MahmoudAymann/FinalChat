@@ -179,24 +179,15 @@ public class ChatActivity extends EmojiCompatActivity implements WhatsAppPanelEv
         Date currentLocalTime = cal.getTime();
         DateFormat date = new SimpleDateFormat("yy:MM:dd:HH:mm:ss a");
         DateFormat date2 = new SimpleDateFormat("HH:mm a");
-        DateFormat date3 = new SimpleDateFormat("MM:dd");
 // you can get seconds by adding  "...:ss" to it
         String localTime = date.format(currentLocalTime);
-        String localTime2 = date2.format(currentLocalTime);
         final FirebaseDatabase fdb = FirebaseDatabase.getInstance();
         final DatabaseReference fdbr = fdb.getReference().child("mssg").child(Roomkey);
         String pushKey = fdbr.push().getKey();
         Smsitem s = new Smsitem(msg, "camo", localTime, Fu.getEmail().toString());
         fdbr.child(pushKey).setValue(s);
         mBottomPanel.setText("");
-        notfy(s);
 
     }
 
-    void notfy(Smsitem s) {
-        //   Intent intent = new Intent(this, NotfyUsers.class);
-        //  intent.putExtra(getString(R.string.smsitem), s);
-        // intent.putExtra(getString(R.string.userPitem), Roomkey);
-        //  startService(intent);
-    }
 }

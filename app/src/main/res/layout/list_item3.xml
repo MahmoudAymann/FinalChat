@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/item2text2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_marginTop="5dp"
@@ -14,7 +14,7 @@
         android:background="@drawable/roundcorner1"
         android:gravity="right"
         android:padding="16dp"
-        android:text="string/http_eccooookkpo"
+        android:text="@string/string_http_eccoo"
         android:textColor="#f210cc"
         android:textSize="19sp" />
 
@@ -26,7 +26,7 @@
         android:layout_marginLeft="-15dp"
         android:layout_marginStart="-10dp"
         android:layout_marginTop="6.5dp"
-        android:contentDescription="string/text1"
+        android:contentDescription="@string/string_text1"
         android:src="@drawable/arrow_bg1" />
 
     <de.hdodenhof.circleimageview.CircleImageView

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_margin="5dp"
-        android:text="string/string_text2"
+        android:text="@string/string_text2"
         android:textAlignment="textStart"
         android:textColor="#000000"
         android:textSize="20sp"

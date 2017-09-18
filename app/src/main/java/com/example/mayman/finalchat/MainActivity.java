@@ -1,7 +1,10 @@
 package com.example.mayman.finalchat;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -125,7 +128,27 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void logout() {
+    private void logout()
+    {
         FirebaseAuth.getInstance().signOut();
+    }
+
+void MUKO()
+{
+    PreferenceManager.getDefaultSharedPreferences(this).edit().putString(getString(R.string.et0),getString(R.string.NOP)).apply();
+    PreferenceManager.getDefaultSharedPreferences(this).edit().putString(getString(R.string.et1),getString(R.string.NOP2)).apply();
+    PreferenceManager.getDefaultSharedPreferences(this).edit().putString(getString(R.string.et2),getString(R.string.NOP3)).apply();
+
+    UpdateWedgie();
+}
+    void UpdateWedgie()
+    {
+        Log.v("mnm","On Update");
+        Intent intent = new Intent(this, NewAppWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] ai = appWidgetManager.getAppWidgetIds(new ComponentName(this, NewAppWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ai);
+        sendBroadcast(intent);
     }
 }//end class

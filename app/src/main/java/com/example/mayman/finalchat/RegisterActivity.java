@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -60,8 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String pass = mPass.getEditText().getText().toString();
 
                 if(!TextUtils.isEmpty(displayName) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(pass)){
-                    progressDialog.setTitle("Registering");
-                    progressDialog.setMessage("Please wait");
+                    progressDialog.setTitle(getString(R.string.LOADING));
+                    progressDialog.setMessage(getString(R.string.PLEASEWAIT));
                    progressDialog.show();
                     progressDialog.setCanceledOnTouchOutside(false);
                     registerToFirebase(displayName,email,pass);
@@ -89,8 +88,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                             HashMap<String,String> userInfo = new HashMap<String, String>();
                             userInfo.put("name",displayName);
-                            userInfo.put("status","Hi there!Iam Using MyChatApp");
-                            userInfo.put("image","img here");
+                            userInfo.put("status",getString(R.string.DEFAULT_STATUS));
+                            userInfo.put("image","");
                             userInfo.put("email",email);
 
                             database.setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -104,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                                          finish();
                                      }
                                      else{
-                                         Toast.makeText(RegisterActivity.this, "something wrong plz try again", Toast.LENGTH_SHORT).show();
+                                         Toast.makeText(RegisterActivity.this, getString(R.string.SOMTHING_WRONG), Toast.LENGTH_SHORT).show();
                                      }
                                 }
                             });
@@ -114,7 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
                             //Auth failed
                             progressDialog.hide();
                             Toast.makeText(RegisterActivity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
-                            Log.v("errorAuth","error sigining in ");
                         }//end else
                     }
                 });//end listner

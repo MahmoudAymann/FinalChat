@@ -1,6 +1,8 @@
 package com.example.mayman.finalchat.services;
 
 import android.app.NotificationManager;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +16,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
+import com.example.mayman.finalchat.NewAppWidget;
 import com.example.mayman.finalchat.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +33,7 @@ import java.util.ArrayList;
 /**
  */
 
-public class UBloodWalpaber extends MyBaseTaskService implements ubloodservice {
+public class UBloodWalpaber extends MyBaseTaskService implements UBloodService {
     //
     //---------- progress par
     private NotificationManager mNotifyManager;
@@ -40,7 +43,7 @@ public class UBloodWalpaber extends MyBaseTaskService implements ubloodservice {
     private int flag;
     private String dwnlnk, dwnlnk_camo;
     private Uri uri_string, uri_string_camo;
-    private ubloodservice mlisttner = this;
+    private UBloodService mlisttner = this;
 
     @Nullable
     @Override
@@ -107,9 +110,19 @@ public class UBloodWalpaber extends MyBaseTaskService implements ubloodservice {
             }
         });
     }
-
+    void UpdateWedgie()
+    {
+        Log.v("mnm","On Update");
+        Intent intent = new Intent(this, NewAppWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] ai = appWidgetManager.getAppWidgetIds(new ComponentName(this, NewAppWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ai);
+        sendBroadcast(intent);
+    }
     // - add data to dp
-    void addToDp() {
+    void addToDp()
+    {
         String result;
         result = dwnlnk;
         if (result.equals("")) {
@@ -126,6 +139,7 @@ public class UBloodWalpaber extends MyBaseTaskService implements ubloodservice {
                                                                           Log.v("exO", "Done");
                                                                           build.setContentText("ubload Complete").setProgress(0, 0, false);
                                                                           mNotifyManager.notify(id, build.build());
+                                                                          UpdateWedgie();
                                                                           taskCompleted();
                                                                       }
                                                                   }
@@ -174,20 +188,7 @@ public class UBloodWalpaber extends MyBaseTaskService implements ubloodservice {
         }
     }
 
-    void delete_element(String uri, String key) {
-        Uri d = Uri.parse(uri);
-        try {
-            getContentResolver().delete(d, null, null);
-        } catch
-                (Exception e) {
-            e.printStackTrace();
-        }
-
-        //case erorr oR extra Boom
-        // sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
-        mlisttner.onComplete(null, key, "1");
-    }
-    //---------------------------------------------------------------------
+ //-------------------------------------------------------------------
 // steps
 // 1 creat  small and get url
 // 2 ublood small and on finish start ublooding big

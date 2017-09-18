@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/menu_settingsID"
-        android:title="Settings"
+        android:title="@string/settings"
         android:orderInCategory="100"/>
     <item
         android:id="@+id/menu_allUser"
-        android:title="All User"
+        android:title="@string/all_user"
         android:orderInCategory="2"/>
     <item
         android:id="@+id/menu_logout"
-        android:title="logout"
+        android:title="@string/logout"
         android:orderInCategory="1"/>
 </menu>

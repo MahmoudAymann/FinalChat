@@ -1,5 +1,7 @@
 package com.example.mayman.finalchat;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -63,15 +65,16 @@ public class SettingsActivity extends AppCompatActivity {
 
                 userName.setText(nameDb);
                 status.setText(statusDb);
-
-                Picasso.with(SettingsActivity.this).load(imageDb).into(imageView);
+                if(imageDb.length()>10) {
+                    Picasso.with(SettingsActivity.this).load(imageDb).centerCrop().resize(100, 100).into(imageView);
+                }
                 store_rco(nameDb,imageDb,statusDb);
 
             }//end onDataChange
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(SettingsActivity.this, "loading error, please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingsActivity.this, getString(R.string.SOMTHING_WRONG)+databaseError, Toast.LENGTH_SHORT).show();
             }//end onCancelled
 
         }); //end get&set user data
@@ -89,7 +92,8 @@ public class SettingsActivity extends AppCompatActivity {
         changeStatusButoon = (Button)findViewById(R.id.changeStatus_button_id);
         changeStatusButoon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 showChangeStatusDialoge();
             }
         });
@@ -115,13 +119,14 @@ public class SettingsActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Integer.valueOf(getString(R.string.selectPhotoIntent))) {
+        if (requestCode == Integer.valueOf(getString(R.string.selectPhotoIntent)))
+        {
             if (resultCode == RESULT_OK) {
                 Uri Imguri = data.getData();
                 UploodBGHelper(Imguri);
 
             } else {
-                Toast.makeText(this, "Faild to get img", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.FAIL_GETIMG), Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -139,20 +144,21 @@ public class SettingsActivity extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
 
         final EditText edittext = new EditText(SettingsActivity.this);
-        alert.setMessage("Enter Your Status:");
-        alert.setTitle("Change Status");
+        alert.setMessage(getString(R.string.ENTERURSTATUS));
+        alert.setTitle(getString(R.string.CHANGE_STATUS));
 
         alert.setView(edittext);
 
-        alert.setPositiveButton("Yes Option", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(getString(R.string.YES), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //What ever you want to do with the value
                 String youEditTextValue = edittext.getText().toString();
                 mUsersDatabaseReference.child("status").setValue(youEditTextValue);
+                UpdateWedgie();
             }
         });
 
-        alert.setNegativeButton("No Option", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(getString(R.string.NO), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // what ever you want to do with No option.
                 dialog.dismiss();
@@ -160,5 +166,15 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         alert.show();
+    }
+    void UpdateWedgie()
+    {
+        Log.v("mnm","On Update");
+        Intent intent = new Intent(this, NewAppWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] ai = appWidgetManager.getAppWidgetIds(new ComponentName(this, NewAppWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ai);
+        sendBroadcast(intent);
     }
 }//end class

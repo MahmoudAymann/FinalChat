@@ -61,8 +61,8 @@ public class ProfileActivity extends AppCompatActivity {
         mCurrent_state = "not_friends";
 
         progressDialog = new ProgressDialog(ProfileActivity.this);
-        progressDialog.setTitle("LoadingUserData");
-        progressDialog.setMessage("please wait...");
+        progressDialog.setTitle(getString(R.string.LOADING));
+        progressDialog.setMessage(getString(R.string.PLEASEWAIT));
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
@@ -108,7 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.hasChild(user_id)) {
                                         mCurrent_state = "friends";
-                                        sendReqButton.setText("Unfriend");
+                                        sendReqButton.setText(getString(R.string.UNFRIEND));
                                         declineButton.setVisibility(View.INVISIBLE);
                                         declineButton.setEnabled(false);
                                     }//end if
@@ -163,7 +163,7 @@ public class ProfileActivity extends AppCompatActivity {
                                         mFriendRequestDatabase.child(user_id).child(mCurrentUser.getUid()).child("request_type").setValue("recieved").addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                sendReqButton.setText("CANCEL FRIEND REQUEST");
+                                                sendReqButton.setText(getString(R.string.CANCEL_FRIEND_REQUEST));
                                                 mCurrent_state = "req_sent";
 
                                                 declineButton.setVisibility(View.INVISIBLE);
@@ -172,7 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             }
                                         });
                                     } else {
-                                        Toast.makeText(ProfileActivity.this, "fail send", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ProfileActivity.this, getString(R.string.SOMTHING_WRONG), Toast.LENGTH_SHORT).show();
                                     }//end else
                                     sendReqButton.setEnabled(true);
                                 }//end onComplete
@@ -190,7 +190,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     sendReqButton.setEnabled(true);
-                                    sendReqButton.setText("SEND REQUEST");
+                                    sendReqButton.setText(getString(R.string.REQ_SEND));
                                     mCurrent_state = "not_friends";
 
                                     declineButton.setVisibility(View.INVISIBLE);
@@ -222,7 +222,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
                                                                     sendReqButton.setEnabled(true);
-                                                                    sendReqButton.setText("Unfriend");
+                                                                    sendReqButton.setText(getString(R.string.UNFRIEND));
                                                                     mCurrent_state = "friends";
 
                                                                     declineButton.setVisibility(View.INVISIBLE);
@@ -249,7 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     sendReqButton.setEnabled(true);
-                                    sendReqButton.setText("SEND REQUEST");
+                                    sendReqButton.setText(getString(R.string.REQ_SEND));
                                     mCurrent_state = "not_friends";
 
                                     declineButton.setVisibility(View.INVISIBLE);
