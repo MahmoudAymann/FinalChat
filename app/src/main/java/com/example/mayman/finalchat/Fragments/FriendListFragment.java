@@ -145,6 +145,7 @@ public class FriendListFragment extends Fragment {
 
         public void setImage(String image) {
             ImageView imageView = mView.findViewById(R.id.user_singleImg_id);
+            if(image.length()>10)
             Picasso.with(mView.getContext()).load(image).centerCrop().resize(100,100).into(imageView);
         }//end setImage
 

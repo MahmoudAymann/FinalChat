@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 
@@ -73,10 +74,12 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
+                String imgurl=dataSnapshot.child("image").getValue().toString();
 
                 textViewName.setText(name);
                 textViewStatus.setText(status);
-
+    if(imgurl.length()>10)
+    Picasso.with(getApplicationContext()).load(imgurl).centerCrop().resize(100,300).into(imageView);
 
                 //.........FRIENDS LIST  / REQUEST FEATURE...........
                 mFriendRequestDatabase.child(mCurrentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {

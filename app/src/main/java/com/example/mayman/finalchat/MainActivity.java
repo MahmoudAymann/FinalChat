@@ -131,9 +131,10 @@ public class MainActivity extends AppCompatActivity {
     private void logout()
     {
         FirebaseAuth.getInstance().signOut();
+        mUKO();
     }
 
-void MUKO()
+void mUKO()
 {
     PreferenceManager.getDefaultSharedPreferences(this).edit().putString(getString(R.string.et0),getString(R.string.NOP)).apply();
     PreferenceManager.getDefaultSharedPreferences(this).edit().putString(getString(R.string.et1),getString(R.string.NOP2)).apply();
