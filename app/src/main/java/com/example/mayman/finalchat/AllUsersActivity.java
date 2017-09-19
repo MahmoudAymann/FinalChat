@@ -48,6 +48,7 @@ public class AllUsersActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(UserViewHolder viewHolder, UserObjs userObjs, int position) {
                 viewHolder.setName(userObjs.getName());
+
                 viewHolder.setStatus(userObjs.getStatus());
 
                 progressDialog.dismiss();

@@ -1,6 +1,7 @@
 package com.example.mayman.finalchat.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mayman.finalchat.ChatA.ChatActivity;
 import com.example.mayman.finalchat.FragmentHolders.FriendList;
 import com.example.mayman.finalchat.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -75,7 +77,7 @@ public class FriendListFragment extends Fragment {
                 FriendsViewHolder.class,
                 mFriendsDatabaseRef) {
             @Override
-            protected void populateViewHolder(final FriendsViewHolder viewHolder, FriendList friendList, int position) {
+            protected void populateViewHolder(final FriendsViewHolder viewHolder, FriendList friendList, final int position) {
 
                 viewHolder.setDate(friendList.getDate());
 
@@ -84,12 +86,25 @@ public class FriendListFragment extends Fragment {
                 mUserDatabaseReference.child(list_idUser).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String uName = dataSnapshot.child("name").getValue().toString();
+                        final String uName = dataSnapshot.child("name").getValue().toString();
                         String uImage = dataSnapshot.child("image").getValue().toString();
                         String uStatus = dataSnapshot.child("status").getValue().toString();
 
                         viewHolder.setName(uName);
                         viewHolder.setImage(uImage);
+
+                        final String user_id = getRef(position).getKey();
+
+                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent chatIntent = new Intent(getContext(),ChatActivity.class);
+                                chatIntent.putExtra("user_id_to_chat",user_id);
+                                chatIntent.putExtra("user_name_to_chat",uName);
+                                startActivity(chatIntent);
+                            }
+                        });
+
                     }
 
                     @Override

@@ -1,79 +1,35 @@
 {
   "project_info": {
-    "project_number": "924610823172",
-    "firebase_url": "https://capstonechatapp.firebaseio.com",
-    "project_id": "capstonechatapp",
-    "storage_bucket": "capstonechatapp.appspot.com"
+    "project_number": "679816414851",
+    "firebase_url": "https://alaaomer-f0240.firebaseio.com",
+    "project_id": "alaaomer-f0240",
+    "storage_bucket": "alaaomer-f0240.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:924610823172:android:97c12ea4a9b4bb8a",
-        "android_client_info": {
-          "package_name": "com.example.mayman.mychatapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "924610823172-v2mci3ech81rei8j275v5a4nhd2i0clf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mayman.mychatapp",
-            "certificate_hash": "694e79320ddbb67c0910e7177953f999b926f4bd"
-          }
-        },
-        {
-          "client_id": "924610823172-qibb3u982q3hfppohh0gd3b7l47ppr81.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBubn8nEEDPI05WMbB34ZM8OCuSFEteSuY"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "924610823172-qibb3u982q3hfppohh0gd3b7l47ppr81.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:924610823172:android:50677008d771f88b",
+        "mobilesdk_app_id": "1:679816414851:android:50677008d771f88b",
         "android_client_info": {
           "package_name": "com.example.mayman.finalchat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "924610823172-lam1t3a23ggebbd3cif0c1opd65283l2.apps.googleusercontent.com",
+          "client_id": "679816414851-vrrl6uu6s970gj4fm3fbi0eqll9c30s0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.mayman.finalchat",
-            "certificate_hash": "694e79320ddbb67c0910e7177953f999b926f4bd"
+            "certificate_hash": "775f44a19ff553743beb1a47fc7d0221b4207376"
           }
         },
         {
-          "client_id": "924610823172-qibb3u982q3hfppohh0gd3b7l47ppr81.apps.googleusercontent.com",
+          "client_id": "679816414851-uk8m2sbbtf1gj85fmu3s96qp4nit0g68.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBubn8nEEDPI05WMbB34ZM8OCuSFEteSuY"
+          "current_key": "AIzaSyCKJFGEhEdC6Rfgb3ueBbGdZSVBRSWq5uw"
         }
       ],
       "services": {
@@ -84,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "924610823172-qibb3u982q3hfppohh0gd3b7l47ppr81.apps.googleusercontent.com",
+              "client_id": "679816414851-uk8m2sbbtf1gj85fmu3s96qp4nit0g68.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

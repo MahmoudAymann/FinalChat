@@ -9,10 +9,21 @@ public class UserObjs {
     String status;
     String imag;
 
-    public UserObjs(String name, String status, String imag) {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    String email;
+
+    public UserObjs(String name, String status, String imag, String email) {
         this.name = name;
         this.status = status;
         this.imag = imag;
+        this.email=email;
     }
 
     public UserObjs() {

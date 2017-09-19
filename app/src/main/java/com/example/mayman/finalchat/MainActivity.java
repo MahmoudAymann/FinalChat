@@ -5,9 +5,18 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.mayman.finalchat.services.MyJobService;
+import com.firebase.jobdispatcher.Constraint;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Lifetime;
+import com.firebase.jobdispatcher.RetryStrategy;
+import com.firebase.jobdispatcher.Trigger;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,12 +31,39 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
 
+        Job myJob = dispatcher.newJobBuilder()
+                // the JobService that will be called
+                .setService(MyJobService.class)
+                // uniquely identifies the job
+                .setTag("my-unique-tag")
+                // one-off job
+                .setRecurring(false)
+                // don't persist past a device reboot
+                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
+                // start between 0 and 60 seconds from now
+                .setTrigger(Trigger.executionWindow(0, 5))
+                // don't overwrite an existing job with the same tag
+                .setReplaceCurrent(false)
+                // retry with exponential backoff
+                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                // constraints that need to be satisfied for the job to run
+                .setConstraints(
+                        // only run on an unmetered network
+                        Constraint.ON_ANY_NETWORK
+                ).build();
+        int result = dispatcher.schedule(myJob);
+
+        if (result != FirebaseJobDispatcher.SCHEDULE_RESULT_SUCCESS) {
+            Log.v("JOB_TAG", "ERROR ON SCHEDULE");}
+        //-----------------------------------------------------
         //Tabs
         viewPager = (ViewPager) findViewById(R.id.pager_id);
         tabLayout = (TabLayout) findViewById(R.id.tab_main_layout);
@@ -36,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPageAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
-
-
 
     }//end onCreate
 

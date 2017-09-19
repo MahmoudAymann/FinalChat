@@ -1,7 +1,7 @@
-package com.example.mayman.finalchat.Services;
+package com.example.mayman.finalchat.services;
 
 /**
- * Created by QEnawi on 4/24/2017.
+ * Created by MahmoudAyman on 4/24/2017.
  */
 
 public interface ubloodservice

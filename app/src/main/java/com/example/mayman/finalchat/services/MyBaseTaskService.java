@@ -1,10 +1,10 @@
-package com.example.mayman.finalchat.Services;
+package com.example.mayman.finalchat.services;
 
 import android.app.Service;
 import android.util.Log;
 
 /**
- * Created by QEnawi on 10/20/2016.
+ * Created by MahmoudAyman on 10/20/2016.
  */
 public abstract class MyBaseTaskService extends Service {
 

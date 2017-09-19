@@ -33,7 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -61,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(displayName) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(pass)){
                     progressDialog.setTitle("Registering");
                     progressDialog.setMessage("Please wait");
-                    progressDialog.show();
+                   progressDialog.show();
                     progressDialog.setCanceledOnTouchOutside(false);
                     registerToFirebase(displayName,email,pass);
                 }
@@ -72,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }//end onCreate
 
-    private void registerToFirebase(final String displayName, String email, String pass) {
+    private void registerToFirebase(final String displayName, final String email, String pass) {
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -90,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                             userInfo.put("name",displayName);
                             userInfo.put("status","Hi there!Iam Using MyChatApp");
                             userInfo.put("image","img here");
+                            userInfo.put("email",email);
 
                             database.setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -119,4 +121,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     }//end registerToFirebase
 
+    @Override
+    protected void onPause()
+    {
+        progressDialog.dismiss();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+       progressDialog.dismiss();
+        super.onDestroy();
+    }
 }//end class RegisterActivity

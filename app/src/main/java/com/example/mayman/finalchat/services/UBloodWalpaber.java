@@ -1,4 +1,4 @@
-package com.example.mayman.finalchat.Services;
+package com.example.mayman.finalchat.services;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 /**
  */
 
-public class uBloodWallpaber extends MyBaseTaskService implements ubloodservice {
+public class UBloodWalpaber extends MyBaseTaskService implements ubloodservice {
     //
     //---------- progress par
     private NotificationManager mNotifyManager;

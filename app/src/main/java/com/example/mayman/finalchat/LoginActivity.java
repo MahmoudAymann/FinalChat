@@ -18,9 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputLayout textInputLayout_email,textInputLayout_pass;
+    TextInputLayout textInputLayoutEmail, textInputLayoutPass;
 
-    Button login_button;
+    Button loginButton;
     FirebaseAuth mAuth;
 
     ProgressDialog loginProgressDialog;
@@ -33,17 +33,17 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAuth = FirebaseAuth.getInstance();
 
-        textInputLayout_email = (TextInputLayout)findViewById(R.id.email_textInputLayout_login_id);
-        textInputLayout_pass = (TextInputLayout)findViewById(R.id.pass_textInputLayout_login_id);
+        textInputLayoutEmail = (TextInputLayout)findViewById(R.id.email_textInputLayout_login_id);
+        textInputLayoutPass = (TextInputLayout)findViewById(R.id.pass_textInputLayout_login_id);
 
         loginProgressDialog = new ProgressDialog(LoginActivity.this);
 
-        login_button = (Button)findViewById(R.id.login_button_id);
-        login_button.setOnClickListener(new View.OnClickListener() {
+        loginButton = (Button)findViewById(R.id.login_button_id);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = textInputLayout_email.getEditText().getText().toString();
-                String pass = textInputLayout_pass.getEditText().getText().toString();
+                String email = textInputLayoutEmail.getEditText().getText().toString();
+                String pass = textInputLayoutPass.getEditText().getText().toString();
 
                 if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(pass)){
                     loginProgressDialog.setTitle("Logging In");

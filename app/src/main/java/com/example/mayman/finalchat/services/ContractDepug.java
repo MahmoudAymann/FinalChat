@@ -1,4 +1,4 @@
-package com.example.mayman.finalchat.Services;
+package com.example.mayman.finalchat.services;
 
 /**
  * Created by MahmoudAyman on 9/17/2017.

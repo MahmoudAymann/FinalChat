@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/layout3"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/emoji_00a9" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="30dp"
+        android:layout_height="22dp"
+        android:layout_gravity="top"
+        android:layout_marginEnd="-10dp"
+        android:layout_marginRight="-15dp"
+        android:layout_marginTop="6.5dp"
+        android:contentDescription="string/text1"
+        android:src="@drawable/ecco3" />
+
+    <TextView
+        android:id="@+id/item2textother"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="5dp"
+        android:layout_weight="6"
+        android:background="@drawable/roundcorner2"
+        android:gravity="top"
+        android:padding="16dp"
+        android:text="string/android_charting_application_xml_ui_design_android_charting_application_xml_ui_design_tutorial_with_example_android_charting_application_xml_ui_design_android_charting_application_xml_ui_design"
+        android:textColor="#000"
+        android:textSize="17.5sp" />
+</LinearLayout>

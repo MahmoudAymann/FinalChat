@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mayman.finalchat.Services.uBloodWallpaber;
+import com.example.mayman.finalchat.services.UBloodWalpaber;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -64,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
                 status.setText(statusDb);
 
                 Picasso.with(SettingsActivity.this).load(imageDb).into(imageView);
+                store_rco(nameDb,imageDb,statusDb);
 
             }//end onDataChange
 
@@ -95,6 +97,14 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     }//end onCreate
+
+    private void store_rco(String nameDb, String imageDb, String statusDb)
+    {
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("eTa0",nameDb).apply();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("eTa1",statusDb).apply();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("eTa2",imageDb).apply();
+    }
+
     //
     private void UploodBG() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -119,7 +129,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void UploodBGHelper(Uri uri)
     {
         // start uplood service
-        getApplicationContext().startService(new Intent(getApplicationContext(), uBloodWallpaber.class)
+        getApplicationContext().startService(new Intent(getApplicationContext(), UBloodWalpaber.class)
                 .putExtra(getString(R.string.uBloodwallpaperServiceintent), uri.toString())
 //                .putExtra("Roomkey", RoomKey)
                 .setAction("ACTION"));

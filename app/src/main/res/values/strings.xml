@@ -29,9 +29,13 @@
     <string name="Wake_up">Wake_up</string>
     <string name="spinner_title">pickStatus</string>
     <string name="title_activity_wake__up__activity">WAKE_UP_ACTIVITY</string>
-<!-- -->
+    <!-- -->
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="CANCEL_FRIEND_REQUEST">CANCEL FRIEND REQUEST</string>
     <string name="ACCEPT_FRIEND_REQUEST">ACCEPT FRIEND REQUEST</string>
+    <string name="chat">Messege</string>
+    <string name="alpha">alphaRoom</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
